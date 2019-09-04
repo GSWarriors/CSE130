@@ -1,0 +1,44 @@
+Design Document asgn0
+Lynne Diep
+CruzID: lytdiep
+CMPS 111, Fall 2018
+
+1. Goal
+The goal for this assignment is to set up FreeBSD environment properly. Additionally, write a simple program that does the same thing as the Unix tail command. The program needs to read a set of files and copy data from the last 10 lines of each of the files specified in the command line to standard output.
+
+2. Assumptions
+I'm assuming that newlines are represented by the character \n. The last 10 newlines would be outputted essentially. If the last line of the file doesn't have a newline, I would still count it as a line and I'll keep in mind of this for the goal of this program.
+
+3. Design
+For this program, I would need to count the bytes of the file since I am only allowed to use system calls. To count the number of lines, I would increment count whenever my character array has a newline. With the total count number, I would find how many lines there are before the last 10 lines. I would close the file, and read it again to set up a new character array. Whenever count2, the count for the new array, reaches the number of lines there are before the last 10 lines, I will save that byte number which starts the tail. Then I will use write(), and write the output starting at that specific byte I found until the file ends.
+
+4. Pseudocode
+int main()
+    while(there are files to be read) {
+	open file
+	char buffer
+	char new line
+
+	if(file < 0)
+		error
+
+	while(read(file bytes))
+		buffer[file bytes]
+		if buffer[] == \n
+			count ++
+		for
+			x =find the number of lines before last 10 lines
+	close(file)
+
+	open(file)
+	while(read(bytes of 2nd char array))
+		if(count2 = x)
+			specific byte = byte of x
+
+	write(specfic byte starts till end of file)
+
+	if(file has less than 10 lines)
+		write(whole file)
+
+	close(file)
+	}
